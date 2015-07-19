@@ -1,5 +1,7 @@
 # Popup
 
+[![NPM](https://nodei.co/npm/popup-window.png)](https://nodei.co/npm/popup-window/)
+
 ## Example usage
 
 ```javascript
