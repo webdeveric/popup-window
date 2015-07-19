@@ -42,11 +42,7 @@ class Popup
       }
     }
 
-    const str = features.join(',');
-
-    console.log( str );
-
-    return str;
+    return features.join(',');
   }
 
   open()
