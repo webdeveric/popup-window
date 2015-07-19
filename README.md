@@ -7,7 +7,7 @@ let win = new Popup(
   'http://webdeveric.com/',
   {
     name: 'window name goes here', // Optional
-    width: 600,∏
+    width: 600,
     height: 400
   }
 );
