@@ -7,7 +7,7 @@ let win = new Popup(
   'http://webdeveric.com/',
   {
     name: 'window name goes here', // Optional
-    width: 600,
+    width: 600,∏
     height: 400
   }
 );
@@ -15,7 +15,7 @@ let win = new Popup(
 win.opened( ( win ) => {
   console.log('Popup has been opened');
 }).blocked( ( win ) => {
-  console.log('Popup has been bloced');
+  console.log('Popup has been blocked');
 }).closed( ( win ) => {
   console.log('Popup has been closed');
 });
