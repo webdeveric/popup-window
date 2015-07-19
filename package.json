@@ -1,15 +1,28 @@
 {
-  "name": "popup",
-  "version": "0.1.0",
+  "name": "popup-window",
+  "version": "1.0.0",
   "description": "Open popup windows",
   "main": "lib/popup.js",
   "files": [
-    "src/popup.js"
+    "lib/popup.js"
   ],
   "scripts": {
     "babel": "babel src --out-dir lib --modules umd --compact",
-    "postinstall": "npm run babel"
+    "prepublish": "npm run babel"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webdeveric/popup-window.git"
+  },
+  "bugs": {
+    "url": "https://github.com/webdeveric/popup-window/issues"
+  },
+  "keywords": [
+    "popup",
+    "window",
+    "blocked",
+    "blocker"
+  ],
   "author": {
     "email": "eric@webdeveric.com",
     "name": "Eric King",
@@ -17,7 +30,7 @@
   },
   "private": true,
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "babel": "^5.6.14"
   }
 }
