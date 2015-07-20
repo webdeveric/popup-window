@@ -1,21 +1,30 @@
 class Popup
 {
-  constructor( url, features = {} )
+  constructor( url = '', features = {} )
   {
-    this.url      = url;
-    this.name     = features.name || '_blank';
-    this.features = Popup.features;
+    this.url      = url || '';
+    this.name     = '_blank';
     this.win      = null;
     this.timer    = null;
-
-    delete features.name;
 
     this.blockedCallback = null;
     this.closedCallback = null;
     this.openedCallback = null;
 
-    for (let f in features) {
-      if ( ! (f in this.features) ) {
+    this.setFeatures( features );
+  }
+
+  setFeatures( features )
+  {
+    this.features = Popup.features;
+
+    if ( features.name ) {
+      this.name = features.name;
+      delete features.name;
+    }
+
+    for ( let f in features ) {
+      if ( ! ( f in this.features ) ) {
         continue;
       }
 
@@ -26,10 +35,28 @@ class Popup
       }
     }
 
-    this.features.width  = ( this.features.width  || screen.availWidth / 2 ) | 0;
-    this.features.height = ( this.features.height || screen.availHeight / 2 ) | 0;
-    this.features.left   = ( this.features.left   || ( screen.availWidth  - this.features.width ) / 2 ) | 0;
-    this.features.top    = ( this.features.top    || ( screen.availHeight - this.features.height ) / 2 ) | 0;
+    if ( this.features.width === null ) {
+      this.features.width = window.screen.availWidth / 2;
+    }
+
+    if ( this.features.height === null ) {
+      this.features.height = window.screen.availHeight / 2;
+    }
+
+    if ( this.features.left === null ) {
+      this.features.left = ( window.screen.availWidth - this.features.width ) / 2;
+    }
+
+    if ( this.features.top === null ) {
+      this.features.top = ( window.screen.availHeight - this.features.height ) / 2;
+    }
+
+    this.features.width  = this.features.width | 0;
+    this.features.height = this.features.height | 0;
+    this.features.left   = ( this.features.left + window.screen.availLeft ) | 0;
+    this.features.top    = ( this.features.top + window.screen.availTop ) | 0;
+
+    return this;
   }
 
   featuresString()
@@ -37,7 +64,7 @@ class Popup
     const features = [];
 
     for ( let f in this.features ) {
-      if ( this.features.hasOwnProperty( f ) ) {
+      if ( this.features.hasOwnProperty( f ) && this.features[ f ] !== null ) {
         features[ features.length ] = `${f}=${this.features[ f ]}`;
       }
     }
@@ -51,6 +78,7 @@ class Popup
 
     if ( this.win && ! this.win.closed ) {
 
+      this.win.moveTo( this.features.left, this.features.top )
       this.win.focus();
 
       if ( typeof this.openedCallback === 'function' ) {
