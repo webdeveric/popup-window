@@ -1,15 +1,28 @@
-class Popup
+export default class Popup
 {
+  static features = {
+    width: null,
+    height: null,
+    left: null,
+    top: null,
+    menubar: 0,
+    toolbar: 0,
+    location: 1,
+    status: 1,
+    resizable: 1,
+    scrollbars: 1
+  };
+
   constructor( url = '', features = {} )
   {
-    this.url      = url || '';
-    this.name     = '_blank';
-    this.win      = null;
-    this.timer    = null;
+    this.url   = url;
+    this.name  = '_blank';
+    this.win   = null;
+    this.timer = null;
 
     this.blockedCallback = null;
-    this.closedCallback = null;
-    this.openedCallback = null;
+    this.closedCallback  = null;
+    this.openedCallback  = null;
 
     this.setFeatures( features );
   }
@@ -23,7 +36,7 @@ class Popup
       delete features.name;
     }
 
-    for ( let f in features ) {
+    for ( const f in features ) {
       if ( ! ( f in this.features ) ) {
         continue;
       }
@@ -63,7 +76,7 @@ class Popup
   {
     const features = [];
 
-    for ( let f in this.features ) {
+    for ( const f in this.features ) {
       if ( this.features.hasOwnProperty( f ) && this.features[ f ] !== null ) {
         features[ features.length ] = `${f}=${this.features[ f ]}`;
       }
@@ -108,6 +121,7 @@ class Popup
   clearTimer()
   {
     window.clearInterval( this.timer );
+
     this.timer = null;
   }
 
@@ -151,18 +165,3 @@ class Popup
     return this.setCallback( 'closed', callback );
   }
 }
-
-Popup.features = {
-  width: null,
-  height: null,
-  left: null,
-  top: null,
-  menubar: 0,
-  toolbar: 0,
-  location: 1,
-  status: 1,
-  resizable: 1,
-  scrollbars: 1
-};
-
-export default Popup;
