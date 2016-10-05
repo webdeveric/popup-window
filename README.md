@@ -2,9 +2,17 @@
 
 [![NPM](https://nodei.co/npm/popup-window.png)](https://nodei.co/npm/popup-window/)
 
-## Example usage
+## Install
+
+```shell
+npm install popup-window --save
+```
+
+## Example usage (es2015)
 
 ```javascript
+import Popup from 'popup-window';
+
 let win = new Popup(
   'http://webdeveric.com/',
   {
@@ -14,11 +22,11 @@ let win = new Popup(
   }
 );
 
-win.opened( ( win ) => {
+win.opened( win => {
   console.log('Popup has been opened');
-}).blocked( ( win ) => {
+}).blocked( win => {
   console.log('Popup has been blocked');
-}).closed( ( win ) => {
+}).closed( win => {
   console.log('Popup has been closed');
 });
 
