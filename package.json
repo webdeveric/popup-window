@@ -3,10 +3,13 @@
   "version": "1.0.2",
   "description": "Open popup windows",
   "main": "lib/popup.js",
+  "jsnext:main": "src/popup.js",
   "files": [
-    "lib/popup.js"
+    "lib/",
+    "src/"
   ],
   "scripts": {
+    "lint": "eslint -c eslint-config-webdeveric --fix src",
     "dev": "babel src --out-dir lib --watch",
     "build": "babel src --out-dir lib --compact",
     "prepublish": "npm run build"
@@ -34,6 +37,8 @@
     "babel-cli": "^6.0",
     "babel-plugin-transform-es2015-modules-umd": "^6.0",
     "babel-preset-es2015": "^6.0",
-    "babel-preset-stage-2": "^6.0"
+    "babel-preset-stage-2": "^6.0",
+    "eslint": "^3.7",
+    "eslint-config-webdeveric": "^0.1"
   }
 }

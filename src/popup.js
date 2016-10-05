@@ -91,7 +91,7 @@ export default class Popup
 
     if ( this.win && ! this.win.closed ) {
 
-      this.win.moveTo( this.features.left, this.features.top )
+      this.win.moveTo( this.features.left, this.features.top );
       this.win.focus();
 
       if ( typeof this.openedCallback === 'function' ) {
