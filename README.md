@@ -1,5 +1,7 @@
 # Popup
 
+[![devDependencies Status](https://david-dm.org/webdeveric/popup-window/dev-status.svg)](https://david-dm.org/webdeveric/popup-window?type=dev)
+
 [![NPM](https://nodei.co/npm/popup-window.png)](https://nodei.co/npm/popup-window/)
 
 ## Install
