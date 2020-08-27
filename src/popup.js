@@ -1,3 +1,5 @@
+const has = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
+
 export default class Popup
 {
   static features = {
@@ -10,7 +12,7 @@ export default class Popup
     location: 1,
     status: 1,
     resizable: 1,
-    scrollbars: 1
+    scrollbars: 1,
   };
 
   constructor( url = '', features = {} )
@@ -77,7 +79,7 @@ export default class Popup
     const features = [];
 
     for ( const f in this.features ) {
-      if ( this.features.hasOwnProperty( f ) && this.features[ f ] !== null ) {
+      if ( has(this.features, f) && this.features[ f ] !== null ) {
         features[ features.length ] = `${f}=${this.features[ f ]}`;
       }
     }
@@ -90,7 +92,6 @@ export default class Popup
     this.win = window.open( this.url, this.name, this.featuresString() );
 
     if ( this.win && ! this.win.closed ) {
-
       this.win.moveTo( this.features.left, this.features.top );
       this.win.focus();
 
@@ -99,11 +100,8 @@ export default class Popup
       }
 
       this.waitForClosed();
-
     } else if ( typeof this.blockedCallback === 'function' ) {
-
       this.blockedCallback( this );
-
     }
 
     return this;
@@ -143,7 +141,7 @@ export default class Popup
   {
     const cb = `${name}Callback`;
 
-    if ( typeof callback === 'function' && this.hasOwnProperty( cb ) ) {
+    if ( typeof callback === 'function' && has(this, cb) ) {
       this[ cb ] = callback;
     }
 
